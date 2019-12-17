@@ -4,6 +4,9 @@
   width:100%;
 }
 
+#gifImage {
+	animation-play-state: paused;
+}
 
 
 

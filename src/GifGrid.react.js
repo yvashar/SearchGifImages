@@ -22,6 +22,9 @@ export default class GifGrid extends React.Component{
 
 	componentDidUpdate(){
 		console.log('gifGrid: updated'); 
+		// if(this.props.searchResult.length === 0){
+		// 	this.closeButtonHandler();
+		// }
 		//this.grids = this.generateTile();
 	}
 

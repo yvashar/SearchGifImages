@@ -8,47 +8,69 @@ export default class HomePage extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			searchResult : {}
+			searchResult : {},
+			isFocused : false,
+			noResultFound : false,
+			loading : false
 		};
 		this.state = {
-           isFocused : false,
-           isBlurred : false,
-           searchResult : {}
+          searchResult : {}
         };
         this.searchResult = {};
-       // this.showResultGrid = this.showResultGrid.bind(this);
+       
       	this.onBlur = this.onBlur.bind(this);
       	this.onFocus = this.onFocus.bind(this);
         this.onTextChange = this.onTextChange.bind(this);
         this.handleKeyDown = this.handleKeyDown.bind(this);
-        this.render = this.render.bind(this)
+        this.render = this.render.bind(this);
+        this.searchHandler = this.searchHandler.bind(this);
+        
+
 	}
 
 	onFocus() {
-		console.log("onFocus");
-		this.setState({isFocused: true});
+		this.setState({isFocused : true, noResultFound : false});
 	}
 
 	onBlur() {
-		this.setState({isFocused: false},function(){
-			console.log("Blur");
-		});
-
+		this.setState({isFocused : false, loading : true});
 		var searchString = document.getElementById('searchButton').value;
 		let that = this;
 		giphy.search(searchString).then(function(resp){
 			if(resp.message  && resp.message === 'API rate limit exceeded'){
+				that.setState({noResultFound : true, loading:false})
 				return;
 			}
 			else{
-				that.setState({searchResult : resp});
-				//that.searchResult = resp;
+				that.setState({searchResult : resp, loading : false});
+				
 			}
 		})
 		.catch(function(){
 			console.log('giphy failed');
+			
 		});
 		
+	}
+
+	searchHandler(e){
+		this.setState({searchResult : [],loading : true})
+		var searchString = document.getElementById('searchButton').value;
+		let that = this;
+		giphy.search(searchString).then(function(resp){
+			if(resp.message  && resp.message === 'API rate limit exceeded'){
+				that.setState({noResultFound : true, loading: false})
+
+				return;
+			}
+			else{
+				that.setState({searchResult : resp, loading : false});
+			}
+		})
+		.catch(function(){
+			console.log('giphy failed');
+			
+		});
 	}
 
 	onTextChange (e) {
@@ -56,7 +78,7 @@ export default class HomePage extends React.Component{
 	}
 
 	handleKeyDown(e){
-		console.log("Key Down");
+		
 	}
 
 	render(){
@@ -68,10 +90,11 @@ export default class HomePage extends React.Component{
             borderColor: "#050100",
             backgroundColor: "rgb(208, 203, 198)",
             color: "#000000",
-            margin : "15px 0px 15px"
+            margin : "15px 0px 15px",
+            borderRadius: "3px"
 		};
 		console.log("this.state.searchResult",this.state.searchResult);
-		let resultGrid = this.state.searchResult ? 
+		let resultGrid = this.state.searchResult && !this.state.isFocused? 
 			(
 				<GifGrid id = 'resultGrid'
 						style = {{
@@ -102,8 +125,22 @@ export default class HomePage extends React.Component{
 		                onKeyDown={e => this.handleKeyDown(e)}
 		                style={searchBoxStyle}
 			        />
+			        <span id="Go"
+			        	   onClick = {e => this.searchHandler(e)}
+			        	   style={{
+			        	   	color: '#000000',
+			        	   	fontSize: "10px",
+			        	   	fontWeight: "500",
+			        	   	cursor: "pointer",
+			        	   	position:"relative",
+			        	   	left: "5px"
+			        	   }}> Go </span>
 			    </div>
-			    {resultGrid}
+			    {this.state.loading ? (<div id="loading" style={{marginTop:"50px"}}> loading... </div>) : ""}
+			    {this.state.noResultFound && !this.state.loading? (<div id="noResultFound" style={{
+			    	marginTop: "50px"
+			    }}>No Results Found</div>) : resultGrid}
+			    
 		    </React.Fragment>
         );
 	}

@@ -23,8 +23,10 @@ export default class GifTile extends React.Component{
 		return (
 			
 				<div id="gridTile" style={{height: "100px", width: "100px", border :"2px" , marginRight : "5px",marginBottom: "5px" }}>
-					<img src = {this.props.url}
-						style={{height: "100%", width: "100%" }}
+					<img id="gifImage" 
+						src = {this.props.url}
+						style={{height: "100%", width: "100%"
+								}}
 						onClick = {e => this.onClickHandler(e, this.props.url)}>
 					</img>
 				</div>
