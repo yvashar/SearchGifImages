@@ -30,6 +30,7 @@ export default class HomePage extends React.Component{
 
 	onFocus() {
 		this.setState({isFocused : true, noResultFound : false});
+		document.getElementById("searchButton").value = "";
 	}
 
 	onBlur() {
