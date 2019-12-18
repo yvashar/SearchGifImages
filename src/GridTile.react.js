@@ -18,14 +18,6 @@ export default class GifTile extends React.Component{
 		this.props.tileClickHandler(clickedUrl);
 	}
 
-
-	componentDidMount(){
-		console.log('gridTile:: mounted');
-	}
-
-
-	
-
 	render(){
 		return (
 			

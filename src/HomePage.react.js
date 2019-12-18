@@ -35,43 +35,31 @@ export default class HomePage extends React.Component{
 
 	onBlur() {
 		this.setState({isFocused : false, loading : true});
-		var searchString = document.getElementById('searchButton').value;
-		let that = this;
-		giphy.search(searchString).then(function(resp){
-			if(resp.message  && resp.message === 'API rate limit exceeded'){
-				that.setState({noResultFound : true, loading:false})
-				return;
-			}
-			else{
-				that.setState({searchResult : resp, loading : false});
-				
-			}
-		})
-		.catch(function(){
-			console.log('giphy failed');
-			
-		});
-		
+		this.searchHandler();
 	}
 
 	searchHandler(e){
 		this.setState({searchResult : [],loading : true})
 		var searchString = document.getElementById('searchButton').value;
 		let that = this;
-		giphy.search(searchString).then(function(resp){
-			if(resp.message  && resp.message === 'API rate limit exceeded'){
-				that.setState({noResultFound : true, loading: false})
-
-				return;
-			}
-			else{
-				that.setState({searchResult : resp, loading : false});
-			}
-		})
-		.catch(function(){
-			console.log('giphy failed');
-			
-		});
+		if(searchString){
+			giphy.search(searchString).then(function(resp){
+				if(resp.message  && resp.message === 'API rate limit exceeded'){
+					that.setState({noResultFound : true, loading: false})
+					return;
+				}
+				else{
+					that.setState({searchResult : resp, loading : false});
+				}
+			})
+			.catch(function(){
+				console.log('giphy failed');
+				
+			});
+		}else{
+			this.setState({loading : false});
+		}
+		
 	}
 
 	onTextChange (e) {
@@ -79,7 +67,7 @@ export default class HomePage extends React.Component{
 	}
 
 	handleKeyDown(e){
-		
+		this.setState({loading:false});
 	}
 
 	render(){
@@ -94,7 +82,7 @@ export default class HomePage extends React.Component{
             margin : "15px 0px 15px",
             borderRadius: "3px"
 		};
-		console.log("this.state.searchResult",this.state.searchResult);
+		
 		let resultGrid = this.state.searchResult && !this.state.isFocused? 
 			(
 				<GifGrid id = 'resultGrid'

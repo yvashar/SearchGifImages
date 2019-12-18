@@ -13,7 +13,7 @@ export default class GifGrid extends React.Component{
 		this.tileClickHandler = this.tileClickHandler.bind(this);
 		this.closeButtonHandler = this.closeButtonHandler.bind(this);
 		this.grids = undefined;
-		console.log('this.state.gridContent',this.state.gridContent);
+		
 	}
 
 	componentDidMount(){
@@ -22,10 +22,7 @@ export default class GifGrid extends React.Component{
 
 	componentDidUpdate(){
 		console.log('gifGrid: updated'); 
-		// if(this.props.searchResult.length === 0){
-		// 	this.closeButtonHandler();
-		// }
-		//this.grids = this.generateTile();
+		
 	}
 
 	tileClickHandler(clickedUrl){
@@ -34,7 +31,7 @@ export default class GifGrid extends React.Component{
 	
 
 	closeButtonHandler(){
-		console.log("closeButtonHandler :: invoked");
+		
 		this.setState({clickedTileUrl : undefined});
 	}
 
