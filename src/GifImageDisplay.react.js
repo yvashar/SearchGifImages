@@ -10,7 +10,7 @@ export default class GifImageDisplay extends React.Component{
 	}
 
 	render(){
-		let that = this;
+		
 		return (
 			<div id= "gifImage" 
 				style = {{height: "100%",

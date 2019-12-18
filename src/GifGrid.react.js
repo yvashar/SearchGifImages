@@ -40,12 +40,11 @@ export default class GifGrid extends React.Component{
 
 	generateTile(){
 		let grids = this.props.searchResult.data && this.props.searchResult.data.map((item, index) => {
-			let url = item.images.downsized_medium.url;
 			return (
-				<GridTile id = "gridTile"
-						  url = {url}
+				<GridTile id = {"gridTile_"+index}
+						key = {"gridTile_"+index}
+						  images = {item.images}
 						  tileClickHandler={this.tileClickHandler}/>
-				
 			);
 		});
 		return grids;
