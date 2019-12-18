@@ -64,7 +64,7 @@ export default class GifGrid extends React.Component{
 		else{
 			return (
 					<div id="gridView" 
-						style= {{height: "auto",
+						style= {{height: "100%",
 								width: "100%",
 								flexDirection: "column",
 								flexFlow: "wrap",
@@ -73,6 +73,7 @@ export default class GifGrid extends React.Component{
 								position: "absolute",
 								top: "50px",
 								padding: "5px 20px 0 20px",
+								backgroundColor:"#00f4ff24"
 								
 						}}>
 						{grids}

@@ -91,7 +91,7 @@ export default class HomePage extends React.Component{
 							width : "100%",
 							position: "absolute",
 							top: "10px",
-							bbackgroundColor:"#00f4ff24"
+							backgroundColor:"#00f4ff24"
 						}}
 						searchResult = {this.state.searchResult}/>
 		    ): "";
