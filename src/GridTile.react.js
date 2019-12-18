@@ -1,5 +1,5 @@
 import React from 'react';
-import $ from "jquery";
+
 //import GifImageDisplay from "./GifImageDisplay.react.js";
 
 export default class GifTile extends React.Component{
