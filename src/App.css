@@ -1,9 +1,9 @@
 .App {
   text-align: center;
-  height: auto;
+  height: 100%;
   width:100%;
   position: absolute;
-  background-color: #00f4ff24;
+  
 }
 
 #gifImage {
