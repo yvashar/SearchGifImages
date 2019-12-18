@@ -64,16 +64,12 @@ export default class GifGrid extends React.Component{
 		else{
 			return (
 					<div id="gridView" 
-						style= {{height: "100%",
-								width: "100%",
+						style= {{
 								flexDirection: "column",
 								flexFlow: "wrap",
 								zIndex: "99",
 								display: "flex",
-								position: "relative",
-								padding: "10px 20px 0 20px",
-								backgroundColor:"#00f4ff24"
-								
+								padding: "10px 20px 0 20px"
 						}}>
 						{grids}
 					</div>
