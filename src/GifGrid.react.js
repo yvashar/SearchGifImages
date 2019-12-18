@@ -70,9 +70,8 @@ export default class GifGrid extends React.Component{
 								flexFlow: "wrap",
 								zIndex: "99",
 								display: "flex",
-								position: "absolute",
-								top: "50px",
-								padding: "5px 20px 0 20px",
+								position: "relative",
+								padding: "10px 20px 0 20px",
 								backgroundColor:"#00f4ff24"
 								
 						}}>
